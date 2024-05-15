@@ -1,0 +1,38 @@
+server:
+  port: 8081
+
+spring:
+  transaction:
+    rollback-on-commit-failure: true
+  datasource:
+    url: jdbc:mysql://nas.lastcoffee.top:8806/competition?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: Liuchang1995.
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
+    static-path-pattern: /static/**
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: cn.fishei.competition.bean
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    auto-mapping-behavior: full
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto #id生成规则：数据库id自增
+
+
+
+
+qrcodeImgsFilePath: C://javaWork/jimer-h/qrcodeImgs/
+
+
+
+
+

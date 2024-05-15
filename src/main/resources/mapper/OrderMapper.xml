@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fishei.competition.mapper.OrderMapper">
+
+    <resultMap type="cn.fishei.competition.bean.Order" id="OrderResult">
+
+    </resultMap>
+
+    <select id="list" parameterType="Map" resultMap="OrderResult">
+        select * from t_order
+        <where>
+            <if test="transac_status!=null and transac_status!=''">
+                and transac_status = #{transac_status}
+            </if>
+        </where>
+        order by order_time desc
+        <if test="start!=null and pageSize!=null">
+            limit #{start},#{pageSize}
+        </if>
+
+    </select>
+
+    <select id="getTotal" parameterType="Map" resultType="Long">
+        select count(*) from t_order
+        <where>
+            <if test="transac_status!=null and transac_status!=''">
+                and transac_status = #{transac_status}
+            </if>
+        </where>
+    </select>
+
+    <!--
+
+    <select id="getSalesVolume" resultMap="SalesVolumeResult">
+        SELECT DATE_FORMAT(order_time, '%Y-%m-%d') AS TIME ,SUM(sett_amount) AS sales_volume FROM t_order  WHERE transac_status='success' AND order_receiving='rec_order' GROUP BY TIME  ORDER BY TIME DESC LIMIT 0,7
+    </select>
+
+    -->
+
+</mapper>
