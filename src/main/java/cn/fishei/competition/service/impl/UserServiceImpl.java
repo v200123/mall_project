@@ -23,28 +23,28 @@ public class UserServiceImpl {
     //    return userMapper.selectFindUserByPhone(phone);
     //}
 
-    public Map<String, Object> loginPhone(User user){
+    public Map<String, Object> loginPhone(User user) {
         Map<String, Object> map = new HashMap<>();
         User u = userMapper.selectFindUserByPhone(user.getPhone());
-        if (u != null){
+        if (u != null) {
 
-            if (u.getState()!=0){
+            if (u.getState() != 0) {
                 String token = CommonUtil.generateUUID();
                 userMapper.updateLoginByPhone(user.getPhone(), CommonUtil.formatDate(new Date()), token);
-                map.put("token",token);
-                map.put("user",u);
-                map.put("status",1);
-            }else{
-                map.put("token",null);
-                map.put("user",null);
-                map.put("status",0);
+                map.put("token", token);
+                map.put("user", u);
+                map.put("status", 1);
+            } else {
+                map.put("token", null);
+                map.put("user", null);
+                map.put("status", 0);
             }
 
-        }else {
-            user.setSalt(CommonUtil.generateUUID().substring(0,5));
-            String newPassword = CommonUtil.generateUUID().substring(0,6);
+        } else {
+            user.setSalt(CommonUtil.generateUUID().substring(0, 5));
+            String newPassword = CommonUtil.generateUUID().substring(0, 6);
             user.setPassword(CommonUtil.md5(newPassword + user.getSalt()));
-            user.setUserPhoto(String.format("https://fishei.cn/static/user/userPhoto/default%d.png", new Random().nextInt(12) + 1 ));
+            user.setUserPhoto(String.format("https://fishei.cn/static/user/userPhoto/default%d.png", new Random().nextInt(12) + 1));
             user.setEmail(null);
             user.setState(1);
             user.setUsername(CommonUtil.usernameList[new Random().nextInt(21)]);
@@ -53,7 +53,7 @@ public class UserServiceImpl {
             user.setTag(1);
             user.setToken(CommonUtil.generateUUID());
             userMapper.insertRegisterUser(user);
-            new Thread(){
+            new Thread() {
                 @SneakyThrows
                 @Override
                 public void run() {
@@ -62,53 +62,53 @@ public class UserServiceImpl {
 //                    SendSms.sendSms("+86"+user.getPhone(),newPassword,"806444");
                 }
             }.start();
-            map.put("token",user.getToken());
-            map.put("user",user);
-            map.put("status","2");
+            map.put("token", user.getToken());
+            map.put("user", user);
+            map.put("status", "2");
         }
         return map;
     }
 
 
-    public Map<String, Object> loginPassword(String phone, String password){
+    public Map<String, Object> loginPassword(String phone, String password) {
         Map<String, Object> map = new HashMap<>();
         User u = userMapper.selectFindUserByPhone(phone);
-         if (u != null){
-            if (u.getState()!=0){
-                String s = CommonUtil.md5(password + u.getSalt());
-                if (u.getPassword().equals(s)){
+        if (u != null) {
+            if (u.getState() != 0) {
+                String s = CommonUtil.md5(password);
+                if (u.getPassword().equals(s)) {
                     String token = CommonUtil.generateUUID();
                     userMapper.updateLoginByPhone(phone, CommonUtil.formatDate(new Date()), token);
-                    map.put("token",token);
-                    map.put("user",u);
-                    map.put("status",1);
-                }else{
-                    map.put("token",null);
-                    map.put("user",null);
-                    map.put("status",4);
+                    map.put("token", token);
+                    map.put("user", u);
+                    map.put("status", 1);
+                } else {
+                    map.put("token", null);
+                    map.put("user", null);
+                    map.put("status", 4);
                 }
-            }else{
-                map.put("token",null);
-                map.put("user",null);
-                map.put("status",0);
+            } else {
+                map.put("token", null);
+                map.put("user", null);
+                map.put("status", 0);
             }
             return map;
-        }else{
-             User user = new User();
-             user.setSalt(CommonUtil.generateUUID().substring(0,5));
-             user.setPassword(CommonUtil.md5("123456"));
-             user.setUserPhoto("https://wx3.sinaimg.cn/large/008gYSn8gy1hpgzzw8yfdj37c04w0he2.jpg");
-             user.setEmail(null);
-             user.setState(1);
-             user.setPhone(phone);
-             user.setUsername(CommonUtil.usernameList[new Random().nextInt(21)]);
-             user.setJoinTime(CommonUtil.formatDate(new Date()));
-             user.setLastLogin(CommonUtil.formatDate(new Date()));
-             user.setTag(1);
-             user.setToken(CommonUtil.generateUUID());
-             userMapper.insertRegisterUser(user);
-            map.put("user",user);
-             map.put("status","2");
+        } else {
+            User user = new User();
+            user.setSalt(CommonUtil.generateUUID().substring(0, 5));
+            user.setPassword(CommonUtil.md5("123456"));
+            user.setUserPhoto("https://wx3.sinaimg.cn/large/008gYSn8gy1hpgzzw8yfdj37c04w0he2.jpg");
+            user.setEmail(null);
+            user.setState(1);
+            user.setPhone(phone);
+            user.setUsername(CommonUtil.usernameList[new Random().nextInt(21)]);
+            user.setJoinTime(CommonUtil.formatDate(new Date()));
+            user.setLastLogin(CommonUtil.formatDate(new Date()));
+            user.setTag(1);
+            user.setToken(CommonUtil.generateUUID());
+            userMapper.insertRegisterUser(user);
+            map.put("user", user);
+            map.put("status", "2");
         }
         return map;
 
