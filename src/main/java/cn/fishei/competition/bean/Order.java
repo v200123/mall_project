@@ -41,7 +41,9 @@ public class Order {
 
     private Integer is_takeout_order;  // 是否外卖单
 
-    @TableField(select = false,exist = false)
-    private Address takeoutAddress  ;  // 外卖地址
+    //@TableField(select = false,exist = false)
+    //private Address takeoutAddress  ;  // 外卖地址
+
+    private String takeout_address; //外卖地址
 
 }
