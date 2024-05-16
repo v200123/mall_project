@@ -10,16 +10,8 @@
 
     <select id="list" parameterType="Map" resultMap="OrderResult">
         select * from t_order
-        <where>
-            <if test="transac_status!=null and transac_status!=''">
-                and transac_status = #{transac_status}
-            </if>
-        </where>
-        order by order_time desc
-        <if test="start!=null and pageSize!=null">
-            limit #{start},#{pageSize}
-        </if>
 
+        order by order_time desc
     </select>
 
     <select id="getTotal" parameterType="Map" resultType="Long">
