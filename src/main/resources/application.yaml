@@ -19,7 +19,7 @@ mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: cn.fishei.competition.bean
   configuration:
-    map-underscore-to-camel-case: true
+    map-underscore-to-camel-case: false
     cache-enabled: true
     auto-mapping-behavior: full
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

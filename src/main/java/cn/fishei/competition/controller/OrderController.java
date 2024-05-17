@@ -73,7 +73,7 @@ public class OrderController {
         list.forEach(new Consumer<Order>() {
             @Override
             public void accept(Order order) {
-                List<OrderDetail> goods_list = orderDetailService.list(new QueryWrapper<OrderDetail>().eq("m_id", order.getId()));
+                List<OrderDetail> goods_list = orderDetailService.list(new QueryWrapper<OrderDetail>().eq("mId", order.getId()));
                 order.setGoods_list(goods_list);
             }
         });

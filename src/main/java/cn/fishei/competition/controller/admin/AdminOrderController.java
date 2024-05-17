@@ -32,7 +32,7 @@ public class AdminOrderController {
      * @param pageBean
      * @return
      */
-    @RequestMapping("/list")
+    @PostMapping("/list")
     public R list(@RequestBody PageBean pageBean){
         System.out.println(pageBean);
         Map<String,Object> map=new HashMap<>();

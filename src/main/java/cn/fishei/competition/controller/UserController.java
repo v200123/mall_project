@@ -23,7 +23,6 @@ public class UserController {
     public Map<String, Object> getCode(@Param("phone") String phone, HttpSession session){
         Map<String, Object> map = new HashMap<>();
         if (phone.length()!=11 || phone.isEmpty()){
-
             map.put("status","lengthError");
         }else{
             try {
@@ -38,7 +37,6 @@ public class UserController {
 //            SendSms.sendSms("+86" + phone, random, "806352");
             map.put("status","ok");
         }
-
         return map;
     }
 
