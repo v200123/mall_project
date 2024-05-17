@@ -58,6 +58,17 @@ public class OrderController {
      */
     @RequestMapping("/get")
     public R get(String table_number,String transac_status){
+        Order order=orderService.list(new QueryWrapper<Order>().eq("table_number", table_number).eq("transac_status", transac_status).orderByDesc("order_time")).get(0);
+        System.out.println("11:"+order);
+        List<OrderDetail> goods_list = orderDetailService.list(new QueryWrapper<OrderDetail>().eq("m_id", order.getId()));
+        Map<String,Object> map=new HashMap<>();
+        map.put("goods_list",goods_list);
+        map.put("menu",order);
+        return R.ok(map);
+    }
+
+    @RequestMapping("/getAll")
+    public R getAll(){
         List<Order> list = orderService.list();
         list.forEach(new Consumer<Order>() {
             @Override
@@ -73,6 +84,5 @@ public class OrderController {
 //        map.put("menu",order);
         return R.ok(map);
     }
-
 
 }
