@@ -33,4 +33,8 @@ public class MenuServiceImpl {
         return menuMapper.queryLikeGoods(key);
     }
 
+    public void saveGoods(Goods good) {
+        menuMapper.saveGoods(good);
+    }
+
 }

@@ -24,5 +24,10 @@
         select * from goods where name like "%"#{key}"%" or description LIKE "%"#{key}"%"
     </select>
 
+    <insert id="saveGoods" parameterType="goods">
+        insert into goods(price, name, description, sales, pic, category_id, tags_id, status)
+        values(#{price},#{name}, #{description}, #{sales}, #{pic}, #{categoryId}, #{tagsId}, #{status})
+    </insert>
+
 
 </mapper>

@@ -1,8 +1,10 @@
 package cn.fishei.competition.controller;
 
+import cn.fishei.competition.bean.Goods;
+import cn.fishei.competition.bean.R;
 import cn.fishei.competition.service.impl.MenuServiceImpl;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -64,4 +66,22 @@ public class MenuController {
         }
         return map;
     }
+
+
+    /**
+     * 创建菜单
+     * @param goods
+     * @return
+     */
+    @PostMapping("/addGoods")
+    public R saveGoods(@RequestBody Goods goods){
+        // System.out.println("order:"+order);
+        menuService.saveGoods(goods);
+        System.out.println(goods.getId());
+        return R.ok();
+    }
+
+
+
+
 }

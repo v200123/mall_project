@@ -17,4 +17,6 @@ public interface MenuMapper {
     List<Goods> queryDrinksLists();
 
     List<Goods> queryLikeGoods(String key);
+
+    void saveGoods(Goods good);
 }
